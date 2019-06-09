@@ -7,13 +7,22 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      items: []
+      services: {
+        shelter: [],
+        food: [],
+        medical: [],
+        dental: [],
+        selfCare: [],
+        community: []
+      },
+      selectedCat: 'shelter',
+      selectedEvent: {}
     }
   }
 
   componentDidMount() {
     $.ajax({
-      url: '/items', 
+      url: '/date', 
       success: (data) => {
         this.setState({
           items: data
