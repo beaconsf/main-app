@@ -4,13 +4,35 @@ CREATE DATABASE beacon;
 
 USE beacon;
 
-CREATE TABLE items (
-  id int NOT NULL AUTO_INCREMENT,
-  quantity integer NOT NULL,
-  description varchar(50) NOT NULL,
-  PRIMARY KEY (ID)
+CREATE TABLE users(
+  id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  username varchar(50) NOT NULL,
+  org varchar(50)
 );
 
-/*  Execute this file from the command line by typing:
- *    mysql -u root < server/schema.sql
- *  to create the database and the tables.*/
+CREATE TABLE events (
+  id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  title varchar(100) NOT NULL,
+  start_time DATETIME NOT NULL,
+  end_time DATETIME NOT NULL,
+  lng DECIMAL(9,6) NOT NULL,
+  lat DECIMAL(9,6) NOT NULL,
+  owner int,
+  FOREIGN KEY (owner)
+  REFERENCES users(id)
+);
+
+CREATE TABLE categories (
+  id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  kind varchar(50)
+);
+
+CREATE TABLE event_type (
+  id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  event_id int,
+  event_kind int,
+  FOREIGN KEY (event_id)
+  REFERENCES events(id),
+  FOREIGN KEY (event_kind)
+  REFERENCES categories(id)
+);
