@@ -22,7 +22,6 @@ class App extends React.Component {
 
     this.handleServiceChange = this.handleServiceChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
-
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -42,13 +41,13 @@ class App extends React.Component {
 
   handleServiceChange(e) {
     e.preventDefault();
-    console.log(e.target);
+    console.log(e.target.value);
     this.setState = { selectedServices: e.target.value };
   }
 
   handleDateChange(e) {
     e.preventDefault();
-    console.log(e.target);
+    console.log(e.target.value);
     this.setState = { selectedDate: e.target.value };
   }
 
