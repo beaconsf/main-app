@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import List from './components/List.jsx';
+import Sidebar from './components/Sidebar.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       services: {
         shelter: [],
         food: [],
@@ -17,28 +17,30 @@ class App extends React.Component {
       },
       selectedCat: 'shelter',
       selectedEvent: {}
-    }
+    };
   }
 
   componentDidMount() {
     $.ajax({
-      url: '/date', 
-      success: (data) => {
+      url: '/date',
+      success: data => {
         this.setState({
           items: data
-        })
+        });
       },
-      error: (err) => {
+      error: err => {
         console.log('err', err);
       }
     });
   }
 
-  render () {
-    return (<div>
-      <h1>Item List</h1>
-      <List items={this.state.items}/>
-    </div>)
+  render() {
+    return (
+      <div>
+        <h1>Beacon</h1>
+        <Sidebar />
+      </div>
+    );
   }
 }
 
