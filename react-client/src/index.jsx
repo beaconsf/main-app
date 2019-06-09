@@ -15,9 +15,15 @@ class App extends React.Component {
         selfCare: [],
         community: []
       },
-      selectedCat: 'shelter',
+      selectedServices: 'shelter',
+      selectedDate: '',
       selectedEvent: {}
     };
+
+    this.handleServiceChange = this.handleServiceChange.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -34,11 +40,32 @@ class App extends React.Component {
     });
   }
 
+  handleServiceChange(e) {
+    e.preventDefault();
+    console.log(e.target);
+    this.setState = { selectedServices: e.target.value };
+  }
+
+  handleDateChange(e) {
+    e.preventDefault();
+    console.log(e.target);
+    this.setState = { selectedDate: e.target.value };
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log(e);
+  }
+
   render() {
     return (
       <div>
         <h1>Beacon</h1>
-        <Sidebar />
+        <Sidebar
+          onSubmit={this.handleSubmit}
+          onChange={this.handleServiceChange}
+          onSelect={this.handleDateChange}
+        />
       </div>
     );
   }

@@ -1,16 +1,10 @@
 import React from 'react';
 
 const Filter = props => {
-  let today = new Date();
-  const dd = String(today.getDate()).padStart(2, '0');
-  const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-  const yyyy = today.getFullYear();
-  today = mm + '/' + dd + '/' + yyyy;
-
   return (
     <div>
       <form>
-        <select name='' id=''>
+        <select name='' id='' onChange={props.handlers.onChange}>
           <option value='shelter'>Shelter</option>
           <option value='food'>Food</option>
           <option value='medical'>Medical</option>
@@ -23,9 +17,13 @@ const Filter = props => {
           <option value='san-francisco'>San Francisco</option>
         </select>
 
-        <input type='date' name='' value='' />
+        <input type='date' name='somedate' onChange={props.handlers.onSelect} />
 
-        <input type='submit' />
+        <input
+          type='submit'
+          value='Submit'
+          onSubmit={props.handlers.onSubmit}
+        />
       </form>
     </div>
   );
