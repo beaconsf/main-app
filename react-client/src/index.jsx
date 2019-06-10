@@ -15,7 +15,7 @@ class App extends React.Component {
         selfCare: [],
         community: []
       },
-      selectedServices: 'shelter',
+      selectedServices: '',
       selectedDate: '',
       selectedEvent: {}
     };
@@ -39,21 +39,19 @@ class App extends React.Component {
     });
   }
 
-  handleServiceChange(e) {
-    e.preventDefault();
-    console.log(e.target.value);
-    this.setState = { selectedServices: e.target.value };
+  handleServiceChange(event) {
+    event.preventDefault();
+    console.log(event.target.value);
+    this.setState({ selectedServices: event.target.value });
   }
 
-  handleDateChange(e) {
-    e.preventDefault();
-    console.log(e.target.value);
-    this.setState = { selectedDate: e.target.value };
+  handleDateChange(event) {
+    this.setState({ selectedDate: event.target.value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(e);
+    console.log(this.state);
   }
 
   render() {

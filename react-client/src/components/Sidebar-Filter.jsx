@@ -26,11 +26,11 @@ const Filter = props => {
         <div className='form__lower'>
           <input type='date' name='date' onChange={props.handlers.onSelect} />
 
-          <input
-            type='submit'
+          <button
+            type='button'
             value='Submit'
-            onSubmit={props.handlers.onSubmit}
-          />
+            onClick={props.handlers.onSubmit}
+          >Submit</button>
         </div>
       </form>
     </div>
