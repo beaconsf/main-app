@@ -81,3 +81,30 @@ button {
 input[type="date"] {
   margin-top: 10px;
 }
+/* From card css */
+.list-cards {
+  padding-top : 25px;
+  padding-bottom: 25px; 
+}
+.list-cards .result-item {
+  margin-left: 25px;
+  margin-right: 25px;
+  padding-bottom: 15px;
+  border-bottom: solid .5px grey;
+  margin-bottom: 15px;
+  list-style: none;
+}
+li.result-item:hover {
+  background-color: #9E9E9E;
+}
+.list-cards h5 {
+  color: #4611a7;
+  font-weight: bold
+}
+
+.list-cards p {
+  padding-top: 10px; 
+}
+li.result-item:hover {
+  background-color: #9E9E9E;
+}
