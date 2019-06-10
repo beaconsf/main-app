@@ -1,20 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import Map from './components/Map.jsx'
+import Map from './components/Map.jsx';
+import Sidebar from './components/Sidebar.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       services: {
-        shelter: [{
-          org: 'St Anthony',
-          title: 'Hackaton',
-          user: '',
-          date: new Date(),
-          loc: [37.782200, -122.413210]
-        }],
+        shelter: [
+          {
+            org: 'St Anthony',
+            title: 'Hackaton',
+            user: '',
+            date: new Date(),
+            loc: [37.7822, -122.41321]
+          }
+        ],
         food: [],
         medical: [],
         dental: [],
@@ -22,56 +25,78 @@ class App extends React.Component {
         community: []
       },
       selectedService: 'shelter',
+      selectedDate: '',
       selectedEvent: {
         org: 'St Anthony',
         title: 'Hackaton',
         user: '',
         date: new Date(),
-        loc: [37.782200, -122.413210]
+        loc: [37.7822, -122.41321]
       },
       zoom: 14
-    }
+    };
+    this.handleServiceChange = this.handleServiceChange.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
     $.ajax({
-      url: '/date', 
-      success: (data) => {
+      url: '/date',
+      success: data => {
         // const services = {};
         // data.forEach(event => {
         //   event.categories.forEach(cat => {
         //     services[cat] = event;
         //   })
         // });
-
         // this.setState({
         //   services: services
         // })
       },
-      error: (err) => {
+      error: err => {
         console.log('err', err);
       }
     });
   }
+  handleServiceChange(event) {
+    event.preventDefault();
+    console.log(event.target.value);
+    this.setState({ selectedServices: event.target.value });
+  }
 
-  render () {
+  handleDateChange(event) {
+    this.setState({ selectedDate: event.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log(this.state);
+  }
+
+  render() {
     const { selectedEvent, services, selectedService, zoom } = this.state;
 
     return (
       <div>
-        <div className="page-header">
+        <div className='page-header'>
           <h1>Beacon</h1>
-
         </div>
         <div>
-          <Map 
-            events={services[selectedService]} 
+          <Map
+            events={services[selectedService]}
             event={selectedEvent}
             zoom={zoom}
           />
+
+          <Sidebar
+            onSubmit={this.handleSubmit}
+            onChange={this.handleServiceChange}
+            onSelect={this.handleDateChange}
+          />
         </div>
       </div>
-    )
+    );
   }
 }
 
