@@ -1,19 +1,19 @@
 import React from 'react';
 import GoogleMap from 'google-map-react';
-import config from '../../../config';
-import Event from './Event.jsx'
- 
-const Map = (props) => {
+import config from '../../../mapConfig';
+import Event from './Event.jsx';
+
+const Map = props => {
   const { events, zoom, event } = props;
   const center = {
     lat: event.loc[0],
     lng: event.loc[1]
-  }
+  };
 
   return (
     <div style={{ height: '100vh', width: '70%' }}>
       <GoogleMap
-        bootstrapURLKeys={{ key: config.api_key}}
+        bootstrapURLKeys={{ key: config.api_key }}
         defaultCenter={center}
         defaultZoom={zoom}
       >
@@ -27,7 +27,7 @@ const Map = (props) => {
         ))}
       </GoogleMap>
     </div>
-  )
-}
- 
+  );
+};
+
 export default Map;
