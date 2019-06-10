@@ -1,24 +1,55 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-// UNCOMMENT THE DATABASE YOU'D LIKE TO USE
-// var items = require('../database-mysql');
-// var items = require('../database-mongo');
+const express = require('express');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const db = require('../database-mysql');
 
-var app = express();
+const app = express();
+app.use(express.static(__dirname + '/../react-client/dist'));
 
-// UNCOMMENT FOR REACT
-// app.use(express.static(__dirname + '/../react-client/dist'));
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// UNCOMMENT FOR ANGULAR
-// app.use(express.static(__dirname + '/../angular-client'));
-// app.use(express.static(__dirname + '/../node_modules'));
-
-app.get('/items', function (req, res) {
-  items.selectAll(function(err, data) {
-    if(err) {
+app.get('/date/:datetime', function(req, res) {
+  const day = req.params.datetime;
+  db.selectAll((err, data) => {
+    if (err) {
       res.sendStatus(500);
     } else {
-      res.json(data);
+      const results = [];
+      data.forEach(event => {
+        let result = {};
+        result.org = event.org;
+        result.title = event.title;
+        result.user = event.username;
+        result.date = day;
+        result.loc = [event.lat, event.lng];
+        result.categories = [];
+        results.push(result);
+      });
+      res.send(results);
+    }
+  });
+});
+
+app.get('/date', function(req, res) {
+  const day = new Date().toISOString().slice(0, 10);
+  db.selectAll((err, data) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      const results = [];
+      data.forEach(event => {
+        let result = {};
+        result.org = event.org;
+        result.title = event.title;
+        result.user = event.username;
+        result.date = day;
+        result.loc = [event.lat, event.lng];
+        result.categories = [];
+        results.push(result);
+      });
+      res.send(results);
     }
   });
 });
@@ -26,4 +57,3 @@ app.get('/items', function (req, res) {
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
-
