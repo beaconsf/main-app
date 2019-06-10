@@ -24,8 +24,9 @@ const Filter = props => {
         </div>
 
         <div className='form__lower'>
+        <label>Date:</label> <br></br>
           <input type='date' name='date' onChange={props.handlers.onSelect} />
-
+          <br></br>
           <button
             type='button'
             value='Submit'
