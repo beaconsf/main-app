@@ -11,7 +11,7 @@ const Map = props => {
   };
 
   return (
-    <div style={{ height: '85vh', width: '70%' }}>
+    <div style={{ height: '100vh', width: '70%' }}>
       <GoogleMap
         bootstrapURLKeys={{ key: config.api_key }}
         defaultCenter={center}

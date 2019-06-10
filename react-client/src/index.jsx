@@ -82,7 +82,7 @@ class App extends React.Component {
         <div className='page-header'>
           <h1>Beacon</h1>
         </div>
-        <div>
+        <div className="container">
           <Map
             events={services[selectedService]}
             event={selectedEvent}
